@@ -1,5 +1,7 @@
 {
-  "password": "aB1234567!",
+  "password1": "aB1234567!",
+  "password2": "aB1234568!",
   "question": "Paternal grandmother's first name?",
-  "answer": "Test"
+  "answer": "Test",
+  "invalid_email": "test"
 }
