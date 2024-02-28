@@ -15,14 +15,19 @@ describe('register with valid data', () => {
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
-    registrationPage.getSecurityQuestionField().click().get('#mat-option-5').click();
-    registrationPage.getAnswerField().type('Test').should('have.prop', 'value', "Test");
+    registrationPage.getSecurityQuestionField().click();
+    registrationPage.getSecurityQuestionFieldValue().click();
+    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
+    registrationPage.getAnswerField().type(user.answer).should('have.prop', 'value', user.answer);
     registrationPage.getRegisterButton().click();
 
     cy.log('Login with registered data');
-    loginPage.getLoginNameField().type(user.email);
-    loginPage.getPasswordField().type(user.password);
+    loginPage.getLoginNameField().type(user.email).should('have.prop', 'value', user.email);
+    loginPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     loginPage.getSubmitButton().click();
 
+    cy.log('User is logged in')
+    registrationPage.getAccountMenuButton().click();
+    registrationPage.getLogoutButton();
   })
 })

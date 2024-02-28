@@ -1,13 +1,13 @@
 export default class BasePage {
 
-    constructor() {
-        this.dropdown = '.dropdown';
-        this.button = '.button';
+    getAccountMenuButton() {
+        return cy.get('#navbarAccount');
     }
 
-    getSearchInput() {
-        return cy.get('#filter_keyword');
+    getLogoutButton() {
+        return cy.get('#navbarLogoutButton');
     }
+
     getCookiePopup() {
         return cy.get('#mat-dialog-0 button[color="primary"]');
     }

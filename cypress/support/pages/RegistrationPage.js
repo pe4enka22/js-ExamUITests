@@ -22,6 +22,11 @@ class RegistrationPage extends BasePage {
         return cy.get('[name="securityQuestion"]');
     }
 
+    getSecurityQuestionFieldValue() {
+        return cy.get('#mat-option-5');
+    }
+
+
     getAnswerField() {
         return cy.get('#securityAnswerControl');
     }
