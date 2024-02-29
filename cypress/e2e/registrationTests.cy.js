@@ -3,7 +3,7 @@ import {faker} from '@faker-js/faker'
 import registrationPage from "../support/pages/RegistrationPage";
 import loginPage from "../support/pages/LoginPage";
 
-user.email = faker.internet.email({ firstName: 'Jeany', lastName: 'Doe' });
+user.email = faker.internet.email({ firstName: 'Jeanny', lastName: 'Doe' });
 user.invalid_email = faker.person.firstName();
 
 describe('register with valid data', () => {
@@ -14,8 +14,8 @@ describe('register with valid data', () => {
 
     cy.log('Fill in the fields');
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
-    registrationPage.getPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
-    registrationPage.getRepeatPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
+    registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getSecurityQuestionField().click();
     registrationPage.getSecurityQuestionFieldValue().click();
     registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
@@ -24,7 +24,7 @@ describe('register with valid data', () => {
 
     cy.log('Login with registered data');
     loginPage.getLoginNameField().type(user.email).should('have.prop', 'value', user.email);
-    loginPage.getPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
+    loginPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     loginPage.getSubmitButton().click();
 
     cy.log('User is logged in')
@@ -41,8 +41,8 @@ describe('register with invalid data', () => {
     registrationPage.getCookiePopup().click();
 
     cy.log('Fill in the fields except email');
-    registrationPage.getPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
-    registrationPage.getRepeatPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
+    registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getSecurityQuestionField().click();
     registrationPage.getSecurityQuestionFieldValue().click();
     registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
@@ -56,6 +56,8 @@ describe('register with invalid data', () => {
 
     cy.log('Verify email field is required');
     registrationPage.getRegisterButton().should('have.prop', 'disabled', true);
+    registrationPage.getRegisterButton().click({force: true});
+    registrationPage.getRegisterButton().should('be.visible');
     registrationPage.getEmailErrorMessageText().should('have.text', 'Email address is not valid.');
   })
 
@@ -72,7 +74,7 @@ describe('register with invalid data', () => {
     registrationPage.getAnswerField().type(user.answer).should('have.prop', 'value', user.answer);
 
     cy.log('Fill in the password fields with different values')
-    registrationPage.getPasswordField().type(user.password1).should('have.prop', 'value', user.password1);
+    registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getRepeatPasswordField().type(user.password2).should('have.prop', 'value', user.password2);
 
     cy.log('Change focus');
@@ -80,6 +82,8 @@ describe('register with invalid data', () => {
 
     cy.log('Verify passwords are different');
     registrationPage.getRegisterButton().should('have.prop', 'disabled', true);
+    registrationPage.getRegisterButton().click({force: true});
+    registrationPage.getRegisterButton().should('be.visible');
     registrationPage.getPasswordErrorMessageText().should('have.prop', 'textContent',' Passwords do not match ');
   })
 })

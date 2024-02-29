@@ -23,12 +23,10 @@ class LoginPage extends BasePage {
         return cy.get('.error.ng-star-inserted');
     }
 
-    fillLoginFields(username = '', password = '') {
+    fillLoginFields(email = '', password = '') {
         cy.log('Fill in authorization fields');
-        username ? this.getLoginNameField().type(username) : cy.log('Skip username field');
+        email ? this.getLoginNameField().type(email) : cy.log('Skip username field');
         password ? this.getPasswordField().type(password) : cy.log('Skip password field');
-        this.getSubmitButton().click();
     }
 }
-
 export default new LoginPage()
