@@ -16,8 +16,8 @@ describe('Leave feedback', () => {
      feedbackPage.getRatingField().trigger('mouseover').click();
 
      cy.log('Get captcha value')
-     feedbackPage.getCaptchaValue().should('be.visible').invoke('text').then((codeCaptchaValue) => {
-         let  result = eval(codeCaptchaValue);
+     feedbackPage.getCaptchaValue().should('be.visible').invoke('text').then((CaptchaValue) => {
+         let result = eval(CaptchaValue);
 
          cy.log('Fill result')
          feedbackPage.getResultField().type(result).should('have.value', result);
