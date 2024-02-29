@@ -3,8 +3,9 @@ import BasePage from "./BasePage";
 class LoginPage extends BasePage {
 
     visit() {
-        cy.log('Open authorization form');
+        cy.log('Open login form and close pop-up');
         cy.visit('/#/login');
+        cy.get('#mat-dialog-0 button[color="primary"]').click();
     }
 
     getLoginNameField() {

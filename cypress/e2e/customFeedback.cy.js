@@ -1,7 +1,9 @@
-describe('template spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+import feedbackPage from "../support/pages/FeedbackPage";
 
-    ///1 test
+describe('Authorization positive scenarios', () => {
+  it('Authorization', () => {
+    feedbackPage.visit();
+
+
   })
 })

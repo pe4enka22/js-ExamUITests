@@ -2,8 +2,9 @@ import BasePage from "./BasePage";
 class RegistrationPage extends BasePage {
 // personal info
     visit() {
-        cy.log('Open authorization form');
+        cy.log('Open registration form and close pop-up');
         cy.visit('/#/register');
+        cy.get('#mat-dialog-0 button[color="primary"]').click();
     }
 
     getEmailField() {

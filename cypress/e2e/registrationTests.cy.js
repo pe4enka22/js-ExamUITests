@@ -10,7 +10,6 @@ describe('register with valid data', () => {
   it('Registration', () => {
     cy.log('Open registration form');
     registrationPage.visit();
-    registrationPage.getCookiePopup().click();
 
     cy.log('Fill in the fields');
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
@@ -38,7 +37,6 @@ describe('register with invalid data', () => {
   it('Registration with invalid email', () => {
     cy.log('Open registration form');
     registrationPage.visit();
-    registrationPage.getCookiePopup().click();
 
     cy.log('Fill in the fields except email');
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
@@ -64,7 +62,6 @@ describe('register with invalid data', () => {
   it('Registration when passwords do not match', () => {
     cy.log('Open registration form');
     registrationPage.visit();
-    registrationPage.getCookiePopup().click();
 
     cy.log('Fill in the fields except passwords');
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);

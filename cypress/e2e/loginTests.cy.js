@@ -4,7 +4,6 @@ import loginPage from "../support/pages/LoginPage";
 describe('Authorization positive scenarios', () => {
   it('Authorization', () => {
     loginPage.visit();
-    loginPage.getCookiePopup().click();
 
     cy.log('Fill in the email and password fields');
     loginPage.fillLoginFields(user.email, user.password);
@@ -26,7 +25,6 @@ describe('Authorization negative scenarios', () => {
 
   it('Authorization without entered username', () => {
     loginPage.visit();
-    loginPage.getCookiePopup().click();
 
 
     loginPage.fillLoginFields('', user.password);
@@ -44,7 +42,6 @@ describe('Authorization negative scenarios', () => {
 
   it('Authorization without entered password', () => {
     loginPage.visit();
-    loginPage.getCookiePopup().click();
 
 
     loginPage.fillLoginFields(user.email, '');
@@ -62,7 +59,6 @@ describe('Authorization negative scenarios', () => {
 
   it('Authorization with empty fields', () => {
     loginPage.visit();
-    loginPage.getCookiePopup().click();
 
 
     loginPage.fillLoginFields('', '');
