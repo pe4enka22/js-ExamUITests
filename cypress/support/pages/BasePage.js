@@ -8,8 +8,12 @@ export default class BasePage {
         return cy.get('#navbarLogoutButton');
     }
 
-    //getCookiePopup() {
-      //  return cy.get('#mat-dialog-0 button[color="primary"]');
-   // }
+    getBurgerMenuButton() {
+        return cy.get('[aria-label="Open Sidenav"]');
+    }
+
+    getFeedbackFromBurgerMenu() {
+        return cy.get('[routerlink="/contact"]');
+   }
 
 }
