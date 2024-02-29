@@ -32,6 +32,13 @@ class FeedbackPage extends BasePage {
         return cy.get('#submitButton');
     }
 
+    getSuccessFeedbackToast() {
+        return cy.get('.cdk-overlay-container ');
+    }
+
+    getFeedbackForm() {
+        return cy.get('#feedback-form');
+    }
 
 }
 export default new FeedbackPage()
