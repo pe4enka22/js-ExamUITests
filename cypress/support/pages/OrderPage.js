@@ -1,20 +1,28 @@
 import BasePage from "./BasePage";
 class OrderPage extends BasePage {
 
-    getAddToCartButton() {
-        return cy.get('.productpagecart');
+    getYourBasketButton() {
+        return cy.get('[aria-label="Show the shopping cart"]');
     }
 
     getCheckoutButton() {
-        return cy.get('#cart_checkout1');
+        return cy.get('#checkoutButton');
     }
 
-    getConfirmOrderButton() {
-        return  cy.get('#checkout_btn');
+    getNewAddressCheckbox() {
+        return cy.get('[role="table"]');
     }
 
-    getOrderConfirmationPage() {
-        return cy.get('.contentpanel');
+    getAddressContinueButton(){
+      return cy.get('[aria-label="Proceed to payment selection"]')
+    }
+
+    getFastDeliveryCheckbox() {
+        return cy.get('[for="mat-radio-42-input"]');
+    }
+
+    getDeliveryContinueButton(){
+        return cy.get('[ aria-label="Proceed to delivery method selection"]')
     }
 
 }
