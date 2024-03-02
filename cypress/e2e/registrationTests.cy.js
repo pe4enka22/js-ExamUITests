@@ -4,8 +4,8 @@ import registrationPage from "../support/pages/RegistrationPage";
 import loginPage from "../support/pages/LoginPage";
 
 user.email = faker.internet.email({ firstName: 'Jeanny', lastName: 'Doe' });
-let invalidEmail = faker.person.firstName();
-let answer = faker.person.lastName;
+const invalidEmail = faker.internet.userName({ firstName: 'Jeanny', lastName: 'Doe' })
+const randomAnswer = faker.person.fullName();
 
 describe('register with valid data', () => {
   it('Registration with valid fields', () => {
@@ -19,7 +19,7 @@ describe('register with valid data', () => {
     registrationPage.getSecurityQuestionField().click();
     registrationPage.getSecurityQuestionFieldValue().click();
     registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(answer).should('have.prop', 'value', answer);
+    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Submit form');
     registrationPage.getRegisterButton().click();
@@ -45,10 +45,10 @@ describe('register with invalid data', () => {
     registrationPage.getSecurityQuestionField().click();
     registrationPage.getSecurityQuestionFieldValue().click();
     registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(answer).should('have.prop', 'value', answer);
+    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Fill in the email field with invalid data');
-    registrationPage.getEmailField().type(user.invalid_email).should('have.prop', 'value', invalidEmail);
+    registrationPage.getEmailField().type(invalidEmail).should('have.prop', 'value', invalidEmail);
 
     cy.log('Change focus');
     registrationPage.getPasswordField().click();
@@ -69,7 +69,7 @@ describe('register with invalid data', () => {
     registrationPage.getSecurityQuestionField().click();
     registrationPage.getSecurityQuestionFieldValue().click();
     registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(answer).should('have.prop', 'value', answer);
+    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Fill in the password fields with different values')
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
