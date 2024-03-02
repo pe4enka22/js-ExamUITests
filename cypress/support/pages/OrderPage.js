@@ -9,20 +9,43 @@ class OrderPage extends BasePage {
         return cy.get('#checkoutButton');
     }
 
-    getNewAddressCheckbox() {
-        return cy.get('[role="table"]');
+    getDecreaseQuantity() {
+        return cy.get('[data-icon="minus-square"]')
+    }
+
+    getIncreaseQuantity() {
+        return cy.get('[data-icon="plus-square"]')
+    }
+    getSelectedProductName() {
+       return cy.get('.cdk-cell.cdk-column-product.mat-column-product')
+    }
+
+    getSelectedProductQuantity() {
+        return cy.get('.content-align.cdk-column-quantity.mat-column-quantity>span')
+    }
+
+    getDeliveryContinueButton(){
+        return cy.get('[ aria-label="Proceed to delivery method selection"]')
     }
 
     getAddressContinueButton(){
       return cy.get('[aria-label="Proceed to payment selection"]')
     }
 
-    getFastDeliveryCheckbox() {
-        return cy.get('[for="mat-radio-42-input"]');
+    getPaymentContinueButton(){
+        return cy.get('[aria-label="Proceed to review"]')
     }
 
-    getDeliveryContinueButton(){
-        return cy.get('[ aria-label="Proceed to delivery method selection"]')
+    getOrderContinueButton(){
+        return cy.get('[aria-label="Complete your purchase"]')
+    }
+
+    getSelectedProductQuantityOnFinish() {
+       return cy.get('.cdk-cell.cdk-column-quantity.mat-column-quantity>span')
+    }
+
+    getConformationOrderText() {
+        return cy.get('.confirmation')
     }
 
 }
