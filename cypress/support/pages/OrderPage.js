@@ -9,10 +9,6 @@ class OrderPage extends BasePage {
         return cy.get('#checkoutButton');
     }
 
-    getDecreaseQuantity() {
-        return cy.get('[data-icon="minus-square"]')
-    }
-
     getIncreaseQuantity() {
         return cy.get('[data-icon="plus-square"]')
     }

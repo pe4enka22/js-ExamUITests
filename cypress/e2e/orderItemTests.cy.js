@@ -3,12 +3,15 @@ import {findProduct} from '../support/helper'
 import loginPage from "../support/pages/LoginPage";
 import orderPage from "../support/pages/OrderPage";
 
+beforeEach(() => {
+  loginPage.visit();
+  cy.log('Login to account');
+  loginPage.fillLoginFields(user.email, user.password);
+  loginPage.getSubmitButton().click();
+
+})
 describe('Order suite', () => {
   it('Order one product from homepage', () => {
-    loginPage.visit();
-    cy.log('Login to account');
-    loginPage.fillLoginFields(user.email, user.password);
-    loginPage.getSubmitButton().click();
 
     cy.log('Find product by name and add it to basket');
     findProduct('Banana Juice (1000ml)');
@@ -46,13 +49,8 @@ describe('Order suite', () => {
   })
 
   it('Order few products from homepage with changing quantity', () => {
-    loginPage.visit();
-    cy.log('Login to account');
-    loginPage.fillLoginFields(user.email, user.password);
-    loginPage.getSubmitButton().click();
 
     cy.log('Find a few products by name and add them to basket');
-    findProduct('Banana Juice (1000ml)');
     findProduct('Banana Juice (1000ml)');
     findProduct('Eggfruit Juice (500ml)');
 
@@ -60,12 +58,11 @@ describe('Order suite', () => {
     orderPage.getYourBasketButton().click();
     cy.reload();
     orderPage.getSelectedProductName().first().should('have.text', ' Banana Juice (1000ml) ');
-    orderPage.getSelectedProductQuantity().first().should('have.text', ' 2');
+    orderPage.getSelectedProductQuantity().first().should('have.text', ' 1');
     orderPage.getSelectedProductName().last().should('have.text', ' Eggfruit Juice (500ml) ');
     orderPage.getSelectedProductQuantity().last().should('have.text', ' 1');
 
-    cy.log('Decrease first product quantity and increase second product quantity');
-    orderPage.getDecreaseQuantity().first().click();
+    cy.log('Increase second product quantity');
     orderPage.getSelectedProductQuantity().first().should('have.text', ' 1');
     orderPage.getIncreaseQuantity().last().click();
     orderPage.getSelectedProductQuantity().last().should('have.text', ' 2');

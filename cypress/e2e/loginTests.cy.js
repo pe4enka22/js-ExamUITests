@@ -1,10 +1,11 @@
 import user from '../fixtures/user.json'
 import loginPage from "../support/pages/LoginPage";
+beforeEach(() => {
+  loginPage.visit();
+})
 
 describe('Authorization positive scenarios', () => {
   it('Authorization with valid data', () => {
-    loginPage.visit();
-
     cy.log('Fill in the email and password fields');
     loginPage.fillLoginFields(user.email, user.password);
 
@@ -23,8 +24,6 @@ describe('Authorization positive scenarios', () => {
 
 describe('Authorization negative scenarios', () => {
   it('Authorization without entered username', () => {
-    loginPage.visit();
-
     loginPage.fillLoginFields('', user.password);
 
     cy.log('Verify fields are filled without email');
@@ -39,8 +38,6 @@ describe('Authorization negative scenarios', () => {
   })
 
   it('Authorization without entered password', () => {
-    loginPage.visit();
-
     loginPage.fillLoginFields(user.email, '');
 
     cy.log('Verify fields are filled in without password');
@@ -55,8 +52,6 @@ describe('Authorization negative scenarios', () => {
   })
 
   it('Authorization with empty fields', () => {
-    loginPage.visit();
-
     loginPage.fillLoginFields('', '');
 
     cy.log('Verify fields are empty');

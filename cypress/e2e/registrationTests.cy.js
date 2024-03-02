@@ -7,19 +7,24 @@ user.email = faker.internet.email({ firstName: 'Jeanny', lastName: 'Doe' });
 const invalidEmail = faker.internet.userName({ firstName: 'Jeanny', lastName: 'Doe' })
 const randomAnswer = faker.person.fullName();
 
+beforeEach(() => {
+  registrationPage.visit();
+
+  cy.log('Fill in the security question field');
+  registrationPage.getSecurityQuestionField().click();
+  registrationPage.getSecurityQuestionFieldValue().click();
+  registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
+
+  cy.log('Fill in the security answer field');
+  registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
+
+})
 describe('register with valid data', () => {
   it('Registration with valid fields', () => {
-    cy.log('Open registration form');
-    registrationPage.visit();
-
-    cy.log('Fill in the fields');
+    cy.log('Fill in the email and password fields');
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
-    registrationPage.getSecurityQuestionField().click();
-    registrationPage.getSecurityQuestionFieldValue().click();
-    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Submit form');
     registrationPage.getRegisterButton().click();
@@ -36,16 +41,9 @@ describe('register with valid data', () => {
 })
 describe('register with invalid data', () => {
   it('Registration with invalid email', () => {
-    cy.log('Open registration form');
-    registrationPage.visit();
-
-    cy.log('Fill in the fields except email');
+    cy.log('Fill in the password fields with same data');
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
-    registrationPage.getSecurityQuestionField().click();
-    registrationPage.getSecurityQuestionFieldValue().click();
-    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Fill in the email field with invalid data');
     registrationPage.getEmailField().type(invalidEmail).should('have.prop', 'value', invalidEmail);
@@ -61,15 +59,8 @@ describe('register with invalid data', () => {
   })
 
   it('Registration when passwords do not match', () => {
-    cy.log('Open registration form');
-    registrationPage.visit();
-
-    cy.log('Fill in the fields except passwords');
+    cy.log('Fill in the email field with valid data');
     registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
-    registrationPage.getSecurityQuestionField().click();
-    registrationPage.getSecurityQuestionFieldValue().click();
-    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
-    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
 
     cy.log('Fill in the password fields with different values')
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
