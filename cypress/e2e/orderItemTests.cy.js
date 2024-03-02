@@ -15,6 +15,7 @@ describe('Order suite', () => {
 
     cy.log('Go to basket and verify product is added with correct quantity');
     orderPage.getYourBasketButton().click();
+    cy.reload();
     orderPage.getSelectedProductName().should('have.text', ' Banana Juice (1000ml) ');
     orderPage.getSelectedProductQuantity().should('have.text', ' 1');
 
@@ -22,15 +23,15 @@ describe('Order suite', () => {
     orderPage.getCheckoutButton().click();
 
     cy.log('Select address and go to the Delivery Address page');
-    cy.get('#mat-radio-40').click();
+    orderPage.getAddressRadioButton().click();
     orderPage.getAddressContinueButton().click();
 
     cy.log('Select delivery option and go to the Payments options page');
-    cy.get('#mat-radio-42').click();
+    orderPage.getDeliveryRadioButton().click();
     orderPage.getDeliveryContinueButton().click();
 
     cy.log('Select card and go to the Order Summary page');
-    cy.get(' #mat-radio-44').click();
+    orderPage.getPaymentRadioButton().click();
     orderPage.getPaymentContinueButton().click();
 
     cy.log('Verify order and complete purchase');
@@ -57,6 +58,7 @@ describe('Order suite', () => {
 
     cy.log('Go to basket and verify products are added with correct quantity');
     orderPage.getYourBasketButton().click();
+    cy.reload();
     orderPage.getSelectedProductName().first().should('have.text', ' Banana Juice (1000ml) ');
     orderPage.getSelectedProductQuantity().first().should('have.text', ' 2');
     orderPage.getSelectedProductName().last().should('have.text', ' Eggfruit Juice (500ml) ');
@@ -72,15 +74,15 @@ describe('Order suite', () => {
     orderPage.getCheckoutButton().click();
 
     cy.log('Select address and go to the Delivery Address page');
-    cy.get('#mat-radio-40').click();
+    orderPage.getAddressRadioButton().click();
     orderPage.getAddressContinueButton().click();
 
     cy.log('Select delivery option and go to the Payments options page');
-    cy.get('#mat-radio-42').click();
+    orderPage.getDeliveryRadioButton().click();
     orderPage.getDeliveryContinueButton().click();
 
     cy.log('Select card and go to the Order Summary page');
-    cy.get(' #mat-radio-44').click();
+    orderPage.getPaymentRadioButton().click();
     orderPage.getPaymentContinueButton().click();
 
     cy.log('Verify order and complete purchase');

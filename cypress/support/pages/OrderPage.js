@@ -48,6 +48,20 @@ class OrderPage extends BasePage {
         return cy.get('.confirmation')
     }
 
+    getAddressRadioButton() {
+        return cy.get('#mat-radio-40')
+    }
+
+    getDeliveryRadioButton() {
+        return cy.get('#mat-radio-42')
+    }
+
+    getPaymentRadioButton() {
+        return cy.get('#mat-radio-44')
+    }
+
+
+
 }
 
 export default new OrderPage()
