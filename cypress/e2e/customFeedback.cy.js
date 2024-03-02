@@ -8,7 +8,7 @@ const randomCaptchaResult = faker.number.int({ max: 100 });
 describe('Leave feedback with valid captcha', () => {
    it('Leave feedback as not logged in user', () => {
      feedbackPage.visit();
-     feedbackPage.getPopupbutton().click();
+     feedbackPage.getClosePopupbutton.click();
 
      cy.log('Check Author field')
      feedbackPage.getUnknownAuthorField().should('have.prop', 'value', 'anonymous');
@@ -37,7 +37,7 @@ describe('Leave feedback with valid captcha', () => {
 })
 
 describe('Leave feedback with invalid captcha', () => {
-    it('Leave feedback as logged in user', () => {
+    it('Leave feedback with invalid data as logged in user', () => {
         loginPage.visit();
 
         cy.log('Fill in the email and password fields');
@@ -51,7 +51,7 @@ describe('Leave feedback with invalid captcha', () => {
         feedbackPage.getFeedbackFromBurgerMenu().click();
 
         cy.log('Check Author field')
-        feedbackPage.getKnownAuthorField().should('have.prop', 'value', '***t1@test.test');
+        feedbackPage.getKnownAuthorField().should('have.prop', 'value', '***t@test.test');
 
         cy.log('Write a comment')
         feedbackPage.getCommentField().type(randomComment).should('have.value', randomComment);
@@ -62,11 +62,10 @@ describe('Leave feedback with invalid captcha', () => {
         cy.log('Set captcha result different from exactly captcha value')
         feedbackPage.getResultField().type(eval(randomCaptchaResult));
 
-
         cy.log('Submit feedback')
         feedbackPage.getSubmitButton().click();
 
-        cy.log('Verify feedback is submitted')
+        cy.log('Verify feedback is not submitted')
         feedbackPage.getErrorFeedbackToast().should('have.text', 'Wrong answer to CAPTCHA. Please try again.')
         feedbackPage.getFeedbackForm().should('be.visible');
     })

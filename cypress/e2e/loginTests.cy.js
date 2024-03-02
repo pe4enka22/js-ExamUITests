@@ -2,7 +2,7 @@ import user from '../fixtures/user.json'
 import loginPage from "../support/pages/LoginPage";
 
 describe('Authorization positive scenarios', () => {
-  it('Authorization', () => {
+  it('Authorization with valid data', () => {
     loginPage.visit();
 
     cy.log('Fill in the email and password fields');
@@ -22,14 +22,12 @@ describe('Authorization positive scenarios', () => {
 })
 
 describe('Authorization negative scenarios', () => {
-
   it('Authorization without entered username', () => {
     loginPage.visit();
 
-
     loginPage.fillLoginFields('', user.password);
 
-    cy.log('Verify fields are filled in with entered data');
+    cy.log('Verify fields are filled without email');
     loginPage.getPasswordField().should('have.prop', 'value', user.password);
     loginPage.getLoginNameField().should('have.prop', 'textContent', "");
 
@@ -43,10 +41,9 @@ describe('Authorization negative scenarios', () => {
   it('Authorization without entered password', () => {
     loginPage.visit();
 
-
     loginPage.fillLoginFields(user.email, '');
 
-    cy.log('Verify fields are filled in with entered data');
+    cy.log('Verify fields are filled in without password');
     loginPage.getLoginNameField().should('have.prop', 'value', user.email);
     loginPage.getPasswordField().should('have.prop', 'textContent', "");
 
@@ -60,10 +57,9 @@ describe('Authorization negative scenarios', () => {
   it('Authorization with empty fields', () => {
     loginPage.visit();
 
-
     loginPage.fillLoginFields('', '');
 
-    cy.log('Verify fields are filled in with entered data');
+    cy.log('Verify fields are empty');
     loginPage.getLoginNameField().should('have.prop', 'textContent', "");
     loginPage.getPasswordField().should('have.prop', 'textContent', "");
 
@@ -71,7 +67,5 @@ describe('Authorization negative scenarios', () => {
     loginPage.getSubmitButton().should('have.prop', 'disabled', true)
     loginPage.getSubmitButton().click({force: true});
     loginPage.getSubmitButton().should('be.visible');
-
-
   })
 })

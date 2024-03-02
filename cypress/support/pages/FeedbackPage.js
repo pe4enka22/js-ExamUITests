@@ -7,7 +7,7 @@ class FeedbackPage extends BasePage {
         cy.visit('/#/contact');
     }
 
-    getPopupbutton() {
+    getClosePopupbutton() {
        return cy.get('#mat-dialog-0 button[color="primary"]');
     }
     getUnknownAuthorField() {

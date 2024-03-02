@@ -2,7 +2,5 @@
   "email": "test@test.test",
   "password": "aB1234567!",
   "password2": "aB1234568!",
-  "question": "Paternal grandmother's first name?",
-  "answer": "Test",
-  "invalid_email": "test"
+  "question": "Paternal grandmother's first name?"
 }
