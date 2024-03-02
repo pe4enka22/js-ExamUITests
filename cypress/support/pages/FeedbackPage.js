@@ -5,10 +5,7 @@ class FeedbackPage extends BasePage {
     visit() {
         cy.log('Open feedback form');
         cy.visit('/#/contact');
-    }
-
-    getClosePopupbutton() {
-       return cy.get('#mat-dialog-0 button[color="primary"]');
+        cy.get('#mat-dialog-0 button[color="primary"]').click();
     }
     getUnknownAuthorField() {
         return cy.get('#mat-input-1');

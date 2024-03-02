@@ -8,7 +8,6 @@ const randomCaptchaResult = faker.number.int({ max: 100 });
 describe('Leave feedback with valid captcha', () => {
    it('Leave feedback as not logged in user', () => {
      feedbackPage.visit();
-     feedbackPage.getClosePopupbutton.click();
 
      cy.log('Check Author field')
      feedbackPage.getUnknownAuthorField().should('have.prop', 'value', 'anonymous');

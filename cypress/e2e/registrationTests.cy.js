@@ -5,7 +5,7 @@ import loginPage from "../support/pages/LoginPage";
 
 user.email = faker.internet.email({ firstName: 'Jeanny', lastName: 'Doe' });
 let invalidEmail = faker.person.firstName();
-let answer = faker.peson.lastName;
+let answer = faker.person.lastName;
 
 describe('register with valid data', () => {
   it('Registration with valid fields', () => {
