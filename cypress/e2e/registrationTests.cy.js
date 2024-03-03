@@ -3,8 +3,8 @@ import {faker} from '@faker-js/faker'
 import registrationPage from "../support/pages/RegistrationPage";
 import loginPage from "../support/pages/LoginPage";
 
-user.email = faker.internet.email({ firstName: 'Jeanny', lastName: 'Doe' });
-const invalidEmail = faker.internet.userName({ firstName: 'Jeanny', lastName: 'Doe' })
+const validRegisterEmail = faker.internet.email({ firstName: 'Menny', lastName: 'Doe' });
+const invalidRegisterEmail = faker.internet.userName({ firstName: 'Jeanny', lastName: 'Doe' })
 const randomAnswer = faker.person.fullName();
 
 beforeEach(() => {
@@ -22,7 +22,7 @@ beforeEach(() => {
 describe('register with valid data', () => {
   it('Registration with valid fields', () => {
     cy.log('Fill in the email and password fields');
-    registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
+    registrationPage.getEmailField().type(validRegisterEmail).should('have.prop', 'value', validRegisterEmail);
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
 
@@ -30,7 +30,7 @@ describe('register with valid data', () => {
     registrationPage.getRegisterButton().click();
 
     cy.log('Login with registered data');
-    loginPage.getLoginNameField().type(user.email).should('have.prop', 'value', user.email);
+    loginPage.getLoginNameField().type(validRegisterEmail).should('have.prop', 'value', validRegisterEmail);
     loginPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
     loginPage.getSubmitButton().click();
 
@@ -46,7 +46,7 @@ describe('register with invalid data', () => {
     registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
 
     cy.log('Fill in the email field with invalid data');
-    registrationPage.getEmailField().type(invalidEmail).should('have.prop', 'value', invalidEmail);
+    registrationPage.getEmailField().type(invalidRegisterEmail).should('have.prop', 'value', invalidRegisterEmail);
 
     cy.log('Change focus');
     registrationPage.getPasswordField().click();
@@ -60,7 +60,7 @@ describe('register with invalid data', () => {
 
   it('Registration when passwords do not match', () => {
     cy.log('Fill in the email field with valid data');
-    registrationPage.getEmailField().type(user.email).should('have.prop', 'value', user.email);
+    registrationPage.getEmailField().type(validRegisterEmail).should('have.prop', 'value', validRegisterEmail);
 
     cy.log('Fill in the password fields with different values')
     registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);

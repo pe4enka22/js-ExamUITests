@@ -2,16 +2,45 @@ import user from '../fixtures/user.json'
 import {findProduct} from '../support/helper'
 import loginPage from "../support/pages/LoginPage";
 import orderPage from "../support/pages/OrderPage";
+import {faker} from "@faker-js/faker";
+import registrationPage from "../support/pages/RegistrationPage";
 
-beforeEach(() => {
-  loginPage.visit();
-  cy.log('Login to account');
-  loginPage.fillLoginFields(user.email, user.password);
-  loginPage.getSubmitButton().click();
+const randomAnswer = faker.person.fullName();
+const orderEmail1 = faker.internet.email({ firstName: 'John1', lastName: 'Snow' });
+const orderEmail2 = faker.internet.email({ firstName: 'Joe1', lastName: 'Doe' });
 
-})
+const country = faker.location.country()
+const name = faker.person.firstName();
+const mobile = faker.phone.number('########');
+const zip = faker.location.zipCode('####');
+const address = faker.location.streetAddress();
+const city = faker.location.city();
+const state = faker.location.state();
+
 describe('Order suite', () => {
   it('Order one product from homepage', () => {
+    registrationPage.visit();
+
+    cy.log('Fill in the security question field');
+    registrationPage.getSecurityQuestionField().click();
+    registrationPage.getSecurityQuestionFieldValue().click();
+    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
+
+    cy.log('Fill in the security answer field');
+    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
+
+    cy.log('Fill in the email and password fields');
+    registrationPage.getEmailField().type(orderEmail1).should('have.prop', 'value', orderEmail1);
+    registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
+
+    cy.log('Submit form');
+    registrationPage.getRegisterButton().click();
+
+    cy.log('Login with registered data');
+    loginPage.getLoginNameField().type(orderEmail1).should('have.prop', 'value', orderEmail1);
+    loginPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    loginPage.getSubmitButton().click();
 
     cy.log('Find product by name and add it to basket');
     findProduct('Banana Juice (1000ml)');
@@ -25,6 +54,17 @@ describe('Order suite', () => {
     cy.log('Click Checkout and go to Address page ');
     orderPage.getCheckoutButton().click();
 
+    cy.log('Add new Address by filling all the fields and submitting form');
+    cy.get('[aria-label="Add a new address"]').click();
+    cy.get('.mat-form-field-infix.ng-tns-c119-7').type(country);
+    cy.get('.mat-form-field-infix.ng-tns-c119-8').type(name);
+    cy.get('.mat-form-field-infix.ng-tns-c119-9').type(mobile);
+    cy.get('.mat-form-field-infix.ng-tns-c119-10').type(zip);
+    cy.get('.mat-form-field-infix.ng-tns-c119-11').type(address);
+    cy.get('.mat-form-field-infix.ng-tns-c119-12').type(city);
+    cy.get('.mat-form-field-infix.ng-tns-c119-13').type(state);
+    cy.get('#submitButton').click();
+
     cy.log('Select address and go to the Delivery Address page');
     orderPage.getAddressRadioButton().click();
     orderPage.getAddressContinueButton().click();
@@ -32,6 +72,14 @@ describe('Order suite', () => {
     cy.log('Select delivery option and go to the Payments options page');
     orderPage.getDeliveryRadioButton().click();
     orderPage.getDeliveryContinueButton().click();
+
+    cy.log('Add new card');
+    cy.get('#mat-expansion-panel-header-0').click();
+    cy.get('.mat-form-field-infix.ng-tns-c119-17').type(name);
+    cy.get('.mat-form-field-infix.ng-tns-c119-18').type(user.card);
+    cy.get('#mat-input-10').select(1);
+    cy.get('#mat-input-11').select(3)
+    cy.get('#submitButton').click();
 
     cy.log('Select card and go to the Order Summary page');
     orderPage.getPaymentRadioButton().click();
@@ -48,7 +96,30 @@ describe('Order suite', () => {
     orderPage.getConformationOrderText().should('have.text', "Thank you for your purchase!")
   })
 
+
   it('Order few products from homepage with changing quantity', () => {
+    registrationPage.visit();
+
+    cy.log('Fill in the security question field');
+    registrationPage.getSecurityQuestionField().click();
+    registrationPage.getSecurityQuestionFieldValue().click();
+    registrationPage.getSecurityQuestionField().should('have.prop', "textContent", user.question);
+
+    cy.log('Fill in the security answer field');
+    registrationPage.getAnswerField().type(randomAnswer).should('have.prop', 'value', randomAnswer);
+
+    cy.log('Fill in the email and password fields');
+    registrationPage.getEmailField().type(orderEmail2).should('have.prop', 'value', orderEmail2);
+    registrationPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    registrationPage.getRepeatPasswordField().type(user.password).should('have.prop', 'value', user.password);
+
+    cy.log('Submit form');
+    registrationPage.getRegisterButton().click();
+
+    cy.log('Login with registered data');
+    loginPage.getLoginNameField().type(orderEmail2).should('have.prop', 'value', orderEmail2);
+    loginPage.getPasswordField().type(user.password).should('have.prop', 'value', user.password);
+    loginPage.getSubmitButton().click();
 
     cy.log('Find a few products by name and add them to basket');
     findProduct('Banana Juice (1000ml)');
@@ -70,6 +141,17 @@ describe('Order suite', () => {
     cy.log('Click Checkout and go to Address page ');
     orderPage.getCheckoutButton().click();
 
+    cy.log('Add new Address by filling all the fields and submitting form');
+    cy.get('[aria-label="Add a new address"]').click();
+    cy.get('.mat-form-field-infix.ng-tns-c119-7').type(country);
+    cy.get('.mat-form-field-infix.ng-tns-c119-8').type(name);
+    cy.get('.mat-form-field-infix.ng-tns-c119-9').type(mobile);
+    cy.get('.mat-form-field-infix.ng-tns-c119-10').type(zip);
+    cy.get('.mat-form-field-infix.ng-tns-c119-11').type(address);
+    cy.get('.mat-form-field-infix.ng-tns-c119-12').type(city);
+    cy.get('.mat-form-field-infix.ng-tns-c119-13').type(state);
+    cy.get('#submitButton').click();
+
     cy.log('Select address and go to the Delivery Address page');
     orderPage.getAddressRadioButton().click();
     orderPage.getAddressContinueButton().click();
@@ -77,6 +159,14 @@ describe('Order suite', () => {
     cy.log('Select delivery option and go to the Payments options page');
     orderPage.getDeliveryRadioButton().click();
     orderPage.getDeliveryContinueButton().click();
+
+    cy.log('Add new card');
+    cy.get('#mat-expansion-panel-header-0').click();
+    cy.get('.mat-form-field-infix.ng-tns-c119-17').type(name);
+    cy.get('.mat-form-field-infix.ng-tns-c119-18').type(user.card);
+    cy.get('#mat-input-10').select(1);
+    cy.get('#mat-input-11').select(3)
+    cy.get('#submitButton').click();
 
     cy.log('Select card and go to the Order Summary page');
     orderPage.getPaymentRadioButton().click();
