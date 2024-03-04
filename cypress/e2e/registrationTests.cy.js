@@ -3,8 +3,8 @@ import {faker} from '@faker-js/faker'
 import registrationPage from "../support/pages/RegistrationPage";
 import loginPage from "../support/pages/LoginPage";
 
-const validRegisterEmail = faker.internet.email({ firstName: 'Menny', lastName: 'Doe' });
-const invalidRegisterEmail = faker.internet.userName({ firstName: 'Jeanny', lastName: 'Doe' })
+const validRegisterEmail = faker.internet.email({ firstName: 'Chandler', lastName: 'Bing' });
+const invalidRegisterEmail = faker.internet.userName({ firstName: 'Monica', lastName: 'Galler' })
 const randomAnswer = faker.person.fullName();
 
 beforeEach(() => {

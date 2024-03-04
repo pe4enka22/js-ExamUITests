@@ -7,7 +7,7 @@ const randomComment = faker.lorem.sentence();
 const randomCaptchaResult = faker.number.int({ max: 100 });
 
 const randomAnswer = faker.person.fullName();
-const feedbackEmail = faker.internet.email({ firstName: 'Amanda', lastName: 'Free' });
+const feedbackEmail = faker.internet.email({ firstName: 'Alona', lastName: 'Donny' });
 describe('Leave feedback with valid captcha', () => {
    it('Leave feedback as not logged in user', () => {
      feedbackPage.visit();

@@ -6,8 +6,8 @@ import {faker} from "@faker-js/faker";
 import registrationPage from "../support/pages/RegistrationPage";
 
 const randomAnswer = faker.person.fullName();
-const orderEmail1 = faker.internet.email({ firstName: 'John1', lastName: 'Snow' });
-const orderEmail2 = faker.internet.email({ firstName: 'Joe1', lastName: 'Doe' });
+const orderEmail1 = faker.internet.email({ firstName: 'Johhn', lastName: 'Snow' });
+const orderEmail2 = faker.internet.email({ firstName: 'Joe', lastName: 'Tribianni' });
 const country = faker.location.country()
 const name = faker.person.firstName();
 const mobile = faker.phone.number('########');

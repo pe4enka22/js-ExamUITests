@@ -4,7 +4,7 @@ import registrationPage from "../support/pages/RegistrationPage";
 import {faker} from "@faker-js/faker";
 
 const randomAnswer = faker.person.fullName();
-const loginEmail = faker.internet.email({ firstName: 'Amanda', lastName: 'Free' });
+const loginEmail = faker.internet.email({ firstName: 'Jordan', lastName: 'Brook' });
 describe('Authorization positive scenarios', () => {
   it('Authorization with valid data', () => {
     registrationPage.visit();

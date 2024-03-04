@@ -11,7 +11,7 @@ class FeedbackPage extends BasePage {
         return cy.get('#mat-input-1');
     }
     getKnownAuthorField() {
-        return cy.get('#mat-input-3');
+        return cy.get('#mat-input-7');
     }
 
     getCommentField() {
