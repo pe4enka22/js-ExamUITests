@@ -3,10 +3,14 @@ import BasePage from "./BasePage";
 class LoginPage extends BasePage {
 
     visit() {
-        cy.log('Open login form and close pop-up');
+        cy.log('Open login form');
         cy.visit('/#/login');
     }
 
+    getPopupCloseButton(){
+        cy.log('Close pop-up');
+        return cy.get('#mat-dialog-0 button[color="primary"]');
+    }
     getLoginNameField() {
         return cy.get('#email');
     }

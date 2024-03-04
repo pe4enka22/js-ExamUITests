@@ -3,7 +3,7 @@ import BasePage from "./BasePage";
 class FeedbackPage extends BasePage {
 
     visit() {
-        cy.log('Open feedback form');
+        cy.log('Open feedback form and close pop-up appeared');
         cy.visit('/#/contact');
         cy.get('#mat-dialog-0 button[color="primary"]').click();
     }

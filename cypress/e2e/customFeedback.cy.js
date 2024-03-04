@@ -12,7 +12,7 @@ describe('Leave feedback with valid captcha', () => {
    it('Leave feedback as not logged in user', () => {
      feedbackPage.visit();
 
-     cy.log('Check Author field')
+     cy.log('Check Author field is anonymous')
      feedbackPage.getUnknownAuthorField().should('have.prop', 'value', 'anonymous');
 
      cy.log('Write a comment')
@@ -70,8 +70,8 @@ describe('Leave feedback with invalid captcha', () => {
         feedbackPage.getBurgerMenuButton().click();
         feedbackPage.getFeedbackFromBurgerMenu().click();
 
-        cy.log('Check Author field')
-        //feedbackPage.getKnownAuthorField().should('have.prop', 'value', '***t@test.test');
+        cy.log('Check Author field is not anonymous')
+        feedbackPage.getKnownAuthorField().should('not.have.prop', 'value', 'anonymous');
 
         cy.log('Write a comment')
         feedbackPage.getCommentField().type(randomComment).should('have.value', randomComment);

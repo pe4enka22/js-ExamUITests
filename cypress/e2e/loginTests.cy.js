@@ -6,7 +6,7 @@ import {faker} from "@faker-js/faker";
 const randomAnswer = faker.person.fullName();
 const loginEmail = faker.internet.email({ firstName: 'Amanda', lastName: 'Free' });
 describe('Authorization positive scenarios', () => {
-  before('Register', () =>{
+  it('Authorization with valid data', () => {
     registrationPage.visit();
 
     cy.log('Fill in the security question field');
@@ -24,8 +24,7 @@ describe('Authorization positive scenarios', () => {
 
     cy.log('Submit form');
     registrationPage.getRegisterButton().click();
-  })
-  it('Authorization with valid data', () => {
+
     cy.log('Fill in the email and password fields');
     loginPage.fillLoginFields(loginEmail, user.password);
 
@@ -45,7 +44,8 @@ describe('Authorization positive scenarios', () => {
 describe('Authorization negative scenarios', () => {
   it('Authorization without entered username', () => {
     loginPage.visit();
-    cy.get('#mat-dialog-0 button[color="primary"]').click();
+    loginPage.getPopupCloseButton().click();
+
     loginPage.fillLoginFields('', user.password);
 
     cy.log('Verify fields are filled without email');
@@ -61,7 +61,8 @@ describe('Authorization negative scenarios', () => {
 
   it('Authorization without entered password', () => {
     loginPage.visit();
-    cy.get('#mat-dialog-0 button[color="primary"]').click();
+    loginPage.getPopupCloseButton().click();
+
     loginPage.fillLoginFields(loginEmail, '');
 
     cy.log('Verify fields are filled in without password');
@@ -77,7 +78,8 @@ describe('Authorization negative scenarios', () => {
 
   it('Authorization with empty fields', () => {
     loginPage.visit();
-    cy.get('#mat-dialog-0 button[color="primary"]').click();
+    loginPage.getPopupCloseButton().click();
+
     loginPage.fillLoginFields('', '');
 
     cy.log('Verify fields are empty');
