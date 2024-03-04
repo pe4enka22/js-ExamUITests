@@ -8,7 +8,6 @@ import registrationPage from "../support/pages/RegistrationPage";
 const randomAnswer = faker.person.fullName();
 const orderEmail1 = faker.internet.email({ firstName: 'John1', lastName: 'Snow' });
 const orderEmail2 = faker.internet.email({ firstName: 'Joe1', lastName: 'Doe' });
-
 const country = faker.location.country()
 const name = faker.person.firstName();
 const mobile = faker.phone.number('########');
@@ -16,7 +15,6 @@ const zip = faker.location.zipCode('####');
 const address = faker.location.streetAddress();
 const city = faker.location.city();
 const state = faker.location.state();
-
 describe('Order suite', () => {
   it('Order one product from homepage', () => {
     registrationPage.visit();
@@ -55,15 +53,15 @@ describe('Order suite', () => {
     orderPage.getCheckoutButton().click();
 
     cy.log('Add new Address by filling all the fields and submitting form');
-    cy.get('[aria-label="Add a new address"]').click();
-    cy.get('.mat-form-field-infix.ng-tns-c119-7').type(country);
-    cy.get('.mat-form-field-infix.ng-tns-c119-8').type(name);
-    cy.get('.mat-form-field-infix.ng-tns-c119-9').type(mobile);
-    cy.get('.mat-form-field-infix.ng-tns-c119-10').type(zip);
-    cy.get('.mat-form-field-infix.ng-tns-c119-11').type(address);
-    cy.get('.mat-form-field-infix.ng-tns-c119-12').type(city);
-    cy.get('.mat-form-field-infix.ng-tns-c119-13').type(state);
-    cy.get('#submitButton').click();
+    orderPage.getNewAddressButton().click();
+    orderPage.getAddressCountryField().type(country);
+    orderPage.getAddressNameField().type(name);
+    orderPage.getAddressMobileField().type(mobile);
+    orderPage.getAddressZipField().type(zip);
+    orderPage.getAddressAddressField().type(address);
+    orderPage.getAddressCityField().type(city);
+    orderPage.getAddressStateField().type(state);
+    orderPage.getSubmitButton().click();
 
     cy.log('Select address and go to the Delivery Address page');
     orderPage.getAddressRadioButton().click();
@@ -74,12 +72,12 @@ describe('Order suite', () => {
     orderPage.getDeliveryContinueButton().click();
 
     cy.log('Add new card');
-    cy.get('#mat-expansion-panel-header-0').click();
-    cy.get('.mat-form-field-infix.ng-tns-c119-17').type(name);
-    cy.get('.mat-form-field-infix.ng-tns-c119-18').type(user.card);
-    cy.get('#mat-input-10').select(1);
-    cy.get('#mat-input-11').select(3)
-    cy.get('#submitButton').click();
+    orderPage.getCardField().click();
+    orderPage.getCardNameField().type(name);
+    orderPage.getCardNumberField().type(user.card);
+    orderPage.getCardMonthField().select(1);
+    orderPage.getCardYearField().select(3);
+    orderPage.getSubmitButton().click();
 
     cy.log('Select card and go to the Order Summary page');
     orderPage.getPaymentRadioButton().click();
@@ -142,15 +140,15 @@ describe('Order suite', () => {
     orderPage.getCheckoutButton().click();
 
     cy.log('Add new Address by filling all the fields and submitting form');
-    cy.get('[aria-label="Add a new address"]').click();
-    cy.get('.mat-form-field-infix.ng-tns-c119-7').type(country);
-    cy.get('.mat-form-field-infix.ng-tns-c119-8').type(name);
-    cy.get('.mat-form-field-infix.ng-tns-c119-9').type(mobile);
-    cy.get('.mat-form-field-infix.ng-tns-c119-10').type(zip);
-    cy.get('.mat-form-field-infix.ng-tns-c119-11').type(address);
-    cy.get('.mat-form-field-infix.ng-tns-c119-12').type(city);
-    cy.get('.mat-form-field-infix.ng-tns-c119-13').type(state);
-    cy.get('#submitButton').click();
+    orderPage.getNewAddressButton().click();
+    orderPage.getAddressCountryField().type(country);
+    orderPage.getAddressNameField().type(name);
+    orderPage.getAddressMobileField().type(mobile);
+    orderPage.getAddressZipField().type(zip);
+    orderPage.getAddressAddressField().type(address);
+    orderPage.getAddressCityField().type(city);
+    orderPage.getAddressStateField().type(state);
+    orderPage.getSubmitButton().click();
 
     cy.log('Select address and go to the Delivery Address page');
     orderPage.getAddressRadioButton().click();
@@ -161,12 +159,12 @@ describe('Order suite', () => {
     orderPage.getDeliveryContinueButton().click();
 
     cy.log('Add new card');
-    cy.get('#mat-expansion-panel-header-0').click();
-    cy.get('.mat-form-field-infix.ng-tns-c119-17').type(name);
-    cy.get('.mat-form-field-infix.ng-tns-c119-18').type(user.card);
-    cy.get('#mat-input-10').select(1);
-    cy.get('#mat-input-11').select(3)
-    cy.get('#submitButton').click();
+    orderPage.getCardField().click();
+    orderPage.getCardNameField().type(name);
+    orderPage.getCardNumberField().type(user.card);
+    orderPage.getCardMonthField().select(1);
+    orderPage.getCardYearField().select(3);
+    orderPage.getSubmitButton().click();
 
     cy.log('Select card and go to the Order Summary page');
     orderPage.getPaymentRadioButton().click();

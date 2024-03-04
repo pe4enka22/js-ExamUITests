@@ -56,8 +56,60 @@ class OrderPage extends BasePage {
         return cy.get('#mat-radio-44')
     }
 
+    getNewAddressButton() {
+        return cy.get('[aria-label="Add a new address"]')
+    }
 
+    getAddressCountryField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-7')
+    }
 
+    getAddressNameField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-8')
+    }
+
+    getAddressMobileField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-9')
+    }
+
+    getAddressZipField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-10')
+    }
+
+    getAddressAddressField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-11')
+    }
+
+    getAddressCityField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-12')
+    }
+
+    getAddressStateField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-13')
+    }
+
+    getCardField() {
+        return cy.get('#mat-expansion-panel-header-0')
+    }
+    getCardNameField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-17')
+    }
+
+    getCardNumberField() {
+        return cy.get('.mat-form-field-infix.ng-tns-c119-18')
+    }
+
+    getCardMonthField() {
+        return cy.get('#mat-input-10')
+    }
+
+    getCardYearField() {
+        return cy.get('#mat-input-11')
+    }
+
+    getSubmitButton() {
+        return cy.get('#submitButton')
+    }
 }
 
 export default new OrderPage()
